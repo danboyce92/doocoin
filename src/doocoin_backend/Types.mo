@@ -7,12 +7,13 @@ import Nat32 "mo:base/Nat32";
 import Nat "mo:base/Nat";
 import Bool "mo:base/Bool";
 import Float "mo:base/Float";
+import Result "mo:base/Result";
 
 
 
 module {
 
-    type Metadata =  {
+    public type Metadata =  {
         logo: ?Text;
         name: ?Text;
         created_at: Nat64;
@@ -21,7 +22,7 @@ module {
         symbol: ?Text;
     };
 
-    type GenericValue = {
+    public type GenericValue = {
         Nat64Content : Nat64;
         Nat32Content : Nat32;
         BoolContent : Bool;
@@ -40,12 +41,12 @@ module {
         TextContent : Text;
     };
 
-    type TokenProperty = {
+    public type TokenProperty = {
         text: Text;
         value: GenericValue;
     };
 
-    type TokenMetadata = {
+    public type TokenMetadata = {
         transferred_at: ?Nat64;
         transferred_by: ?Principal;
         owner: ?Principal;
@@ -61,6 +62,74 @@ module {
         minted_by: Principal;
     };
 
+    public type NftError = {
+        #SelfTransfer;
+        #TokenNotFound;
+        #TxNotFound;
+        #SelfApprove;
+        #OperatorNotFound;
+        #UnauthorizedOwner;
+        #UnauthorizedOperator;
+        #ExistedNFT;
+        #OwnerNotFound;
+        #Other : Text;
+    };
+
+
+    public type Nft = {
+        owner: Principal;
+        id: TokenId;
+        metadata: MetadataDesc;
+    };
+
+    public type MetadataDesc = [MetadataPart];
+
+    public type MetadataPart = {
+        purpose: MetadataPurpose;
+        key_val_data: [MetadataKeyVal];
+        data: Blob;
+    };
+
+    public type MetadataPurpose = {
+        #Preview;
+        #Rendered;
+    };
+
+    public type MetadataKeyVal = {
+        key: Text;
+        val: MetadataVal;
+    };
+
+    public type MetadataVal = {
+        #TextContent : Text;
+        #BlobContent : Blob;
+        #NatContent : Nat;
+        #Nat8Content: Nat8;
+        #Nat16Content: Nat16;
+        #Nat32Content: Nat32;
+        #Nat64Content: Nat64;
+    };
+
+    public type ApiError = {
+        #Unauthorized;
+        #InvalidTokenId;
+        #ZeroAddress;
+        #Other;
+    };
+
+    public type Result<S, E> = {
+        #Ok : S;
+        #Err : E;
+    };
+
+    public type MintReceipt = Result<MintReceiptPart, ApiError>;
+
+    public type TokenId = Nat64;
+
+    public type MintReceiptPart = {
+        token_id: TokenId;
+        id: Nat;
+    };
 
 
 }

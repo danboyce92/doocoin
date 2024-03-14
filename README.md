@@ -65,3 +65,6 @@ If you are hosting frontend code somewhere without using DFX, you may need to ma
 # Details here
 First copy all the structures of the required types into the Type.mo
 Create a mint function that doesn't throw an error and has a custom location key that points to a url
+
+
+danb Principal - v6y2x-g3ib4-zffbg-pprid-3uhdj-jvxwj-zzqy3-p4vea-ikohi-fasvs-vqe
