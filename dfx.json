@@ -1,0 +1,26 @@
+{
+  "canisters": {
+    "doocoin_backend": {
+      "main": "src/doocoin_backend/main.mo",
+      "type": "motoko"
+    },
+    "doocoin_frontend": {
+      "dependencies": [
+        "doocoin_backend"
+      ],
+      "source": [
+        "src/doocoin_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "doocoin_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
