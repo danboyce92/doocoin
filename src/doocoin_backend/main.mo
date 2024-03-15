@@ -10,13 +10,15 @@ import Array "mo:base/Array";
 import Option "mo:base/Option";
 import Bool "mo:base/Bool";
 import Principal "mo:base/Principal";
+import Time "mo:base/Time";
 import Types "./Types";
 import Doos "./Doos";
 
 // Define a shared actor class called 'Dip721NFT' that takes a 'Principal' ID as the custodian value and is initialized with the types for the Dip721NonFungibleToken.
 // This actor class also defines several stable variables.
 shared actor class Dip721NFT(custodian: Principal, init : Types.Dip721NonFungibleToken) = Self {
-  let dooBase64 = Doos.doo;
+
+  let dooBase64 = Doos.elements;
   stable var transactionId: Types.TransactionId = 0;
   stable var nfts = List.nil<Types.Nft>();
   stable var custodians = List.make<Principal>(custodian);
@@ -193,4 +195,11 @@ shared actor class Dip721NFT(custodian: Principal, init : Types.Dip721NonFungibl
       id = transactionId;
     });
   };
+
+
+  public func getTime() : async Int {
+    let time = Time.now();
+    return time;
+  }
+
 }
