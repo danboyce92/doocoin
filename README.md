@@ -68,3 +68,74 @@ Create a mint function that doesn't throw an error and has a custom location key
 
 
 danb Principal - v6y2x-g3ib4-zffbg-pprid-3uhdj-jvxwj-zzqy3-p4vea-ikohi-fasvs-vqe
+Alpha Principal - h4gm6-k5f44-42epx-hxmzx-hfc4r-ngo5d-zxkky-7injh-no6t4-7vv3z-rae
+
+
+
+# TO RUN
+
+dfx deploy --argument "(
+  principal\"$(dfx identity get-principal)\", 
+  record {
+    logo = record {
+      logo_type = \"image/png\";
+      data = \"\";
+    };
+    name = \"My DIP721\";
+    symbol = \"DFXB\";
+    maxLimit = 10;
+  }
+)" doocoin_backend
+
+
+# TO MINT
+
+
+DOO_BASE64="dooBase64"
+DOO_HEX=$(echo -n "$DOO_BASE64" | base64 -d | xxd -p)
+DOO_BLOB=$(printf 'blob"%s"' "$DOO_HEX")
+
+dfx canister call doocoin_backend mintDip721 \
+"(
+  principal \"$(dfx identity get-principal)\",
+  vec {
+    record {
+      purpose = variant { Rendered };
+      data = $DOO_BLOB;
+      key_val_data = vec {
+        record { key = \"description\"; val = variant { TextContent = \"The NFT metadata can hold arbitrary metadata\" }; };
+        record { key = \"tag\"; val = variant { TextContent = \"anime\" }; };
+        record { key = \"contentType\"; val = variant { TextContent = \"text/plain\" }; };
+        record { key = \"locationType\"; val = variant { Nat8Content = 4:nat8 } };
+      }
+    }
+  }
+)"
+
+
+
+
+
+
+
+
+
+
+dfx canister call doocoin_backend mintDip721 \
+"(
+  principal\"$(dfx identity get-principal)\", 
+  vec { 
+    record {
+      purpose = variant{Rendered};
+      data = dooBase64;
+      key_val_data = vec {
+        record { key = \"description\"; val = variant{TextContent=\"The NFT metadata can hold arbitrary metadata\"}; };
+        record { key = \"tag\"; val = variant{TextContent=\"anime\"}; };
+        record { key = \"contentType\"; val = variant{TextContent=\"text/plain\"}; };
+        record { key = \"locationType\"; val = variant{Nat8Content=4:nat8} };
+      }
+    }
+  }
+)"
+
+
