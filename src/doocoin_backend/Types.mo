@@ -76,6 +76,23 @@ module {
     };
 
 
+
+
+    public type Dip721NonFungibleToken = {
+        logo: LogoResult;
+        name: Text;
+        symbol: Text;
+        maxLimit : Nat16;
+    };
+
+    public type LogoResult = {
+        logo_type: Text;
+        data: Text;
+    };
+
+    public type TransactionId = Nat;
+
+
     public type Nft = {
         owner: Principal;
         id: TokenId;
