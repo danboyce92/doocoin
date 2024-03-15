@@ -11,8 +11,10 @@ import Option "mo:base/Option";
 import Bool "mo:base/Bool";
 import Principal "mo:base/Principal";
 import Time "mo:base/Time";
+import Cap "mo:cap/Cap";
 import Types "./Types";
 import Doos "./Doos";
+
 
 // Define a shared actor class called 'Dip721NFT' that takes a 'Principal' ID as the custodian value and is initialized with the types for the Dip721NonFungibleToken.
 // This actor class also defines several stable variables.
