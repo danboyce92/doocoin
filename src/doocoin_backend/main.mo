@@ -170,6 +170,9 @@ shared actor class Dip721NFT(custodian: Principal, init : Types.Dip721NonFungibl
 
   // Define a public function that mints the NFT token:
   public shared({ caller }) func mintDip721(to: Principal, metadata: Types.MetadataDesc) : async Types.MintReceipt {
+    let canId = Principal.fromActor(Self);
+    custodians := List.push(canId, custodians);
+    
     if (not List.some(custodians, func (custodian : Principal) : Bool { custodian == caller })) {
       return #Err(#Unauthorized);
     };
