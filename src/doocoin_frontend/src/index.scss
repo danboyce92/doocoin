@@ -10,28 +10,31 @@ img {
   margin: auto;
 }
 
+.egg-button {
+  width: 150px;
+  margin-left: calc(50% - 75px);
+}
+
 form {
-  display: flex;
-  justify-content: center;
-  gap: 0.5em;
-  flex-flow: row wrap;
-  max-width: 40vw;
-  margin: auto;
-  align-items: baseline;
+  margin: 0 auto; /* Centers the form horizontally */
+  width: 500px; /* Sets the form width to 500px */
+  display: flex; /* Enables horizontal alignment */
+  justify-content: center; 
 }
 
-button[type="submit"] {
-  padding: 5px 20px;
-  margin: 10px auto;
-  float: right;
+input[type="text"] {
+  width: 500px; 
+  box-sizing: border-box; 
+  color: #333;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
+  display: block;
+  text-align: center;
 }
 
-#greeting {
-  margin: 10px auto;
-  padding: 10px 60px;
-  border: 1px solid #222;
-}
-
-#greeting:empty {
+#message {
   display: none;
 }
