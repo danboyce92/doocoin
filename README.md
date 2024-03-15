@@ -113,29 +113,9 @@ dfx canister call doocoin_backend mintDip721 \
 )"
 
 
+walletId="lpteq-btov7-wwcmf-3vvt7-c5kkb-bmcah-qruk5-rxp7h-f3jjo-yvck3-5qe"
 
+dfx canister call doocoin_backend transferFromDip721 "(principal\"$(dfx identity get-principal)\", principal\"$walletId\", 0)"
 
-
-
-
-
-
-
-dfx canister call doocoin_backend mintDip721 \
-"(
-  principal\"$(dfx identity get-principal)\", 
-  vec { 
-    record {
-      purpose = variant{Rendered};
-      data = dooBase64;
-      key_val_data = vec {
-        record { key = \"description\"; val = variant{TextContent=\"The NFT metadata can hold arbitrary metadata\"}; };
-        record { key = \"tag\"; val = variant{TextContent=\"anime\"}; };
-        record { key = \"contentType\"; val = variant{TextContent=\"text/plain\"}; };
-        record { key = \"locationType\"; val = variant{Nat8Content=4:nat8} };
-      }
-    }
-  }
-)"
 
 
