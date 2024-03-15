@@ -1,4 +1,4 @@
 {
-  dependencies = [ "base", "cap-motoko-library" ],
-  compiler = Some "0.6.11"
+  dependencies = [ "base", "matchers", "cap" ],
+  compiler = None Text
 }
