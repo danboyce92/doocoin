@@ -91,9 +91,13 @@ dfx deploy --argument "(
 # TO MINT
 
 
-DOO_BASE64="dooBase64"
+<!-- DOO_BASE64="dooBase64[0]"
 DOO_HEX=$(echo -n "$DOO_BASE64" | base64 -d | xxd -p)
-DOO_BLOB=$(printf 'blob"%s"' "$DOO_HEX")
+DOO_BLOB=$(printf 'blob"%s"' "$DOO_HEX") -->
+
+DATA_VALUE=$(getNFTindex)
+DATA_BASE64=$(echo -n "$DATA_VALUE" | base64)
+DATA_BLOB="blob\"$DATA_BASE64\""
 
 dfx canister call doocoin_backend mintDip721 \
 "(
