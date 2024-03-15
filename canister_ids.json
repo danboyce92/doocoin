@@ -1,5 +1,8 @@
 {
   "doocoin_backend": {
     "ic": "qivvz-uiaaa-aaaah-qdcxq-cai"
+  },
+  "doocoin_frontend": {
+    "ic": "svi3r-haaaa-aaaah-qdcya-cai"
   }
 }
