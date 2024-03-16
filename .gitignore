@@ -4,6 +4,7 @@
 **/*~
 
 .vessel
+.mops
 
 # Mac OSX temporary files
 .DS_Store
