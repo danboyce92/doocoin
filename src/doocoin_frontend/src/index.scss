@@ -4,8 +4,8 @@ body {
 }
 
 .egg-button {
-  width: 150px;
-  margin-left: calc(50% - 75px);
+  width: 100px;
+  margin-left: calc(50% - 50px);
   margin-top: -10px;
 }
 
@@ -32,4 +32,17 @@ input[type="text"] {
 #message {
   display: block;
   text-align: center;
+  color: #ffffff;
+}
+
+.claim-title {
+  margin: 0 auto;
+  width: 500px;
+  display: flex;
+  justify-content: center; 
+}
+
+.claim-title img {
+  width: 100%;
+  padding: 15px;
 }

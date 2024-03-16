@@ -23,15 +23,16 @@ function App() {
     document.cookie = `${SubmittedCookieName}=true; path=/`;
     // doocoin_backend.foundEgg(pid).then(() => {
     //   setSubmitted(true);
-    //   set cookie
     // });
     return false;
   }
 
   return (
     <main>
+      <div className="claim-title"><img src="claim.png" /></div>
       {!submitted ? (
       <section>
+
         <form action="#" onSubmit={handleSubmit}>
           <div className="input-container">
             <input id="pid" alt="Principal ID" pattern="\S{63}" required placeholder="Enter your ICP Principal ID and click the egg..." type="text" />
@@ -41,7 +42,7 @@ function App() {
         </form> 
       </section>
       ) : (
-      <div id="message">Eggcelent! You minted a golden egg! Check your wallet and keep an eye on your egg to see when it hatches.</div>
+      <div id="message">Eggcelent! You minted a golden egg!<br />Check your wallet and keep an eye on your egg to see when it hatches.</div>
       )}
     </main>
   );
