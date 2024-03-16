@@ -23,7 +23,6 @@ function App() {
     document.cookie = `${SubmittedCookieName}=true; path=/`;
     // doocoin_backend.foundEgg(pid).then(() => {
     //   setSubmitted(true);
-    //   set cookie
     // });
     return false;
   }
