@@ -79,10 +79,10 @@ dfx deploy --argument "(
   record {
     logo = record {
       logo_type = \"image/png\";
-      data = \"\";
+      data = \"Data here\";
     };
-    name = \"My DIP721\";
-    symbol = \"DFXB\";
+    name = \"DooNFTs\";
+    symbol = \"DOO\";
     maxLimit = 10;
   }
 )" doocoin_backend
@@ -108,7 +108,7 @@ dfx canister call doocoin_backend mintDip721 \
       data = $DOO_BLOB;
       key_val_data = vec {
         record { key = \"description\"; val = variant { TextContent = \"The NFT metadata can hold arbitrary metadata\" }; };
-        record { key = \"tag\"; val = variant { TextContent = \"anime\" }; };
+        record { key = \"tag\"; val = variant { TextContent = \"Dynamic kids cute easter egg\" }; };
         record { key = \"contentType\"; val = variant { TextContent = \"text/plain\" }; };
         record { key = \"locationType\"; val = variant { Nat8Content = 4:nat8 } };
       }

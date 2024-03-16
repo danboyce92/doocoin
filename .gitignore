@@ -3,6 +3,8 @@
 .idea/
 **/*~
 
+.vessel
+
 # Mac OSX temporary files
 .DS_Store
 **/.DS_Store
@@ -23,5 +25,4 @@ dist/
 
 # environment variables
 .env
-
-.vessel
+.mops

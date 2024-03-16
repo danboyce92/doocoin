@@ -11,7 +11,9 @@ import Option "mo:base/Option";
 import Bool "mo:base/Bool";
 import Principal "mo:base/Principal";
 import Time "mo:base/Time";
-import Cap "mo:cap/Cap";
+import Iter "mo:base/Iter";
+import Text "mo:base/Text";
+// import Cap "mo:cap/Cap";
 import Types "./Types";
 import Doos "./Doos";
 
@@ -29,6 +31,10 @@ shared actor class Dip721NFT(custodian: Principal, init : Types.Dip721NonFungibl
   stable var symbol : Text = init.symbol;
   stable var maxLimit : Nat16 = init.maxLimit;
 
+
+
+
+  //START OF ORDINARY NFT FUNCTIONS
 
   // Define a 'null_address' variable. Check out the forum post for a detailed explanation:
   // https://forum.dfinity.org/t/is-there-any-address-0-equivalent-at-dfinity-motoko/5445/3
@@ -177,9 +183,9 @@ shared actor class Dip721NFT(custodian: Principal, init : Types.Dip721NonFungibl
     let canId = Principal.fromActor(Self);
     custodians := List.push(canId, custodians);
     
-    if (not List.some(custodians, func (custodian : Principal) : Bool { custodian == caller })) {
-      return #Err(#Unauthorized);
-    };
+    // if (not List.some(custodians, func (custodian : Principal) : Bool { custodian == caller })) {
+    //   return #Err(#Unauthorized);
+    // };
 
     let newId = Nat64.fromNat(List.size(nfts));
     let nft : Types.Nft = {
@@ -202,6 +208,22 @@ shared actor class Dip721NFT(custodian: Principal, init : Types.Dip721NonFungibl
   public func getTime() : async Int {
     let time = Time.now();
     return time;
+  };
+
+
+  public query func http_request(request : Types.HttpRequest) : async Types.HttpResponse {
+    // let width : Text = "500";
+    // let height : Text = "500";
+    let ctype = "text/html";
+    let path = Iter.toArray(Text.tokens(request.url, #text("/")));
+
+    return {
+      status_code = 200;
+      headers = [("content-type", ctype),("cache-control", "public, max-age=15552000")];
+      body = Text.encodeUtf8("<img src=\"data:image/png;base64 ," # Doos.getNFTindex() # "\" alt=\"Red dot\" />");
+      streaming_strategy = null;
+    };
+
   }
 
 }
