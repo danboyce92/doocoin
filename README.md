@@ -69,7 +69,6 @@ Alpha Principal - h4gm6-k5f44-42epx-hxmzx-hfc4r-ngo5d-zxkky-7injh-no6t4-7vv3z-ra
 # TO RUN
 
 dfx deploy --argument "(
-<<<<<<< HEAD
   principal\"$(dfx identity get-principal)\", 
   record {
     logo = record {
@@ -80,18 +79,6 @@ dfx deploy --argument "(
     symbol = \"DOO\";
     maxLimit = 10;
   }
-=======
-principal\"$(dfx identity get-principal)\",
-record {
-logo = record {
-logo_type = \"image/png\";
-data = \"\";
-};
-name = \"My DIP721\";
-symbol = \"DFXB\";
-maxLimit = 10;
-}
->>>>>>> 6ff91ffa31fa15c5b441427ac2232054b0584126
 )" doocoin_backend
 
 # IC
@@ -121,12 +108,11 @@ DATA_BLOB="blob\"$DATA_BASE64\""
 
 dfx canister call doocoin_backend mintDip721 \
 "(
-<<<<<<< HEAD
   principal \"$(dfx identity get-principal)\",
   vec {
     record {
       purpose = variant { Rendered };
-      data = $DOO_BLOB;
+      data = 
       key_val_data = vec {
         record { key = \"description\"; val = variant { TextContent = \"The NFT metadata can hold arbitrary metadata\" }; };
         record { key = \"tag\"; val = variant { TextContent = \"Dynamic kids cute easter egg\" }; };
@@ -135,21 +121,6 @@ dfx canister call doocoin_backend mintDip721 \
       }
     }
   }
-=======
-principal \"$(dfx identity get-principal)\",
-vec {
-record {
-purpose = variant { Rendered };
-data = $DOO_BLOB;
-key_val_data = vec {
-record { key = \"description\"; val = variant { TextContent = \"The NFT metadata can hold arbitrary metadata\" }; };
-record { key = \"tag\"; val = variant { TextContent = \"anime\" }; };
-record { key = \"contentType\"; val = variant { TextContent = \"text/plain\" }; };
-record { key = \"locationType\"; val = variant { Nat8Content = 4:nat8 } };
-}
-}
-}
->>>>>>> 6ff91ffa31fa15c5b441427ac2232054b0584126
 )"
 
 walletId="lpteq-btov7-wwcmf-3vvt7-c5kkb-bmcah-qruk5-rxp7h-f3jjo-yvck3-5qe"

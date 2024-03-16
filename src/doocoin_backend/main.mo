@@ -10,11 +10,8 @@ import Option "mo:base/Option";
 import Bool "mo:base/Bool";
 import Principal "mo:base/Principal";
 import Time "mo:base/Time";
-<<<<<<< HEAD
 import Iter "mo:base/Iter";
 import Text "mo:base/Text";
-=======
->>>>>>> 6ff91ffa31fa15c5b441427ac2232054b0584126
 // import Cap "mo:cap/Cap";
 import Types "./Types";
 import Doos "./Doos";
@@ -32,14 +29,10 @@ shared actor class Dip721NFT(custodian : Principal, init : Types.Dip721NonFungib
   stable var symbol : Text = init.symbol;
   stable var maxLimit : Nat16 = init.maxLimit;
 
-<<<<<<< HEAD
-
 
 
   //START OF ORDINARY NFT FUNCTIONS
 
-=======
->>>>>>> 6ff91ffa31fa15c5b441427ac2232054b0584126
   // Define a 'null_address' variable. Check out the forum post for a detailed explanation:
   // https://forum.dfinity.org/t/is-there-any-address-0-equivalent-at-dfinity-motoko/5445/3
   let null_address : Principal = Principal.fromText("aaaaa-aa");
@@ -186,20 +179,13 @@ shared actor class Dip721NFT(custodian : Principal, init : Types.Dip721NonFungib
   };
 
   // Define a public function that mints the NFT token:
-  public shared ({ caller }) func mintDip721(to : Principal, metadata : Types.MetadataDesc) : async Types.MintReceipt {
-    let canId = Principal.fromActor(Self);
-    custodians := List.push(canId, custodians);
-<<<<<<< HEAD
-    
-    // if (not List.some(custodians, func (custodian : Principal) : Bool { custodian == caller })) {
+  public shared ({ caller }) func mintDip721(to : Principal, metadata : Text) : async Types.MintReceipt {
+    // let canId = Principal.fromActor(Self);
+    // custodians := List.push(canId, custodians);
+
+    // if (not List.some(custodians, func(custodian : Principal) : Bool { custodian == caller })) {
     //   return #Err(#Unauthorized);
     // };
-=======
-
-    if (not List.some(custodians, func(custodian : Principal) : Bool { custodian == caller })) {
-      return #Err(#Unauthorized);
-    };
->>>>>>> 6ff91ffa31fa15c5b441427ac2232054b0584126
 
     let newId = Nat64.fromNat(List.size(nfts));
     let nft : Types.Nft = {
@@ -222,13 +208,13 @@ shared actor class Dip721NFT(custodian : Principal, init : Types.Dip721NonFungib
     let time = Time.now();
     return time;
   };
-<<<<<<< HEAD
 
 
   public query func http_request(request : Types.HttpRequest) : async Types.HttpResponse {
     // let width : Text = "500";
     // let height : Text = "500";
     let ctype = "text/html";
+    // let ctype2 = "text/svg";
     let path = Iter.toArray(Text.tokens(request.url, #text("/")));
 
     return {
@@ -239,7 +225,5 @@ shared actor class Dip721NFT(custodian : Principal, init : Types.Dip721NonFungib
     };
 
   }
-=======
->>>>>>> 6ff91ffa31fa15c5b441427ac2232054b0584126
 
 };

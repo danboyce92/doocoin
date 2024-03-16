@@ -48,22 +48,20 @@ module {
   public type Nft = {
     owner: Principal;
     id: TokenId;
-    metadata: MetadataDesc;
+    metadata: Text;
   };
 
   public type ExtendedMetadataResult = Result<{
-    metadata_desc: MetadataDesc;
+    metadata_desc: Text;
     token_id: TokenId;
   }, ApiError>;
 
-  public type MetadataResult = Result<MetadataDesc, ApiError>;
+  public type MetadataResult = Result<Text, ApiError>;
 
   public type MetadataDesc = [MetadataPart];
 
   public type MetadataPart = {
-    purpose: MetadataPurpose;
-    key_val_data: [MetadataKeyVal];
-    data: Blob;
+    data: Text;
   };
 
   public type MetadataPurpose = {
