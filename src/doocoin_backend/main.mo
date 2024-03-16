@@ -204,6 +204,20 @@ shared actor class Dip721NFT(custodian : Principal, init : Types.Dip721NonFungib
     });
   };
 
+  public func mint(to: Principal) : async Text {
+    let newId = Nat64.fromNat(List.size(nfts));
+    let nft : Types.Nft = {
+      owner = to;
+      id = newId;
+      metadata = "HardCoded";
+    };
+    nfts := List.push(nft, nfts);
+
+    transactionId += 1;
+
+    return "qivvz-uiaaa-aaaah-qdcxq";
+  };
+
   public func getTime() : async Int {
     let time = Time.now();
     return time;

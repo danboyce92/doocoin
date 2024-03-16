@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { doocoin_backend } from 'declarations/doocoin_backend';
+import { doocoin_backend } from 'declarations/doocoin_backend';
 
 function App() {
   const [submitted, setSubmitted] = useState(false);
@@ -21,9 +21,9 @@ function App() {
     console.log("Egg clicked!"+ pid);
     setSubmitted(true);
     document.cookie = `${SubmittedCookieName}=true; path=/`;
-    // doocoin_backend.foundEgg(pid).then(() => {
-    //   setSubmitted(true);
-    // });
+    doocoin_backend.mint(pid).then(() => {
+      setSubmitted(true);
+    });
     return false;
   }
 
