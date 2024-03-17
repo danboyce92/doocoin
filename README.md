@@ -1,6 +1,6 @@
 # Dooza Dynamic NFT Factory
-<div style="width:20%; margin: auto;">
-![Dooza NFT Factory](./src/doocoin_backend/images/nft-logo.png)
+<div style="text-align:center">
+<img src="./src/doocoin_backend/images/nft-logo.png" />
 </div>
 **Welcome to the Dooza NFT Factory**
 
