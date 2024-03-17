@@ -3,7 +3,7 @@
 <img src="./src/doocoin_backend/images/nft-logo.png" />
 
 
-**Welcome to the Dooza NFT Factory**
+## Welcome to the Dooza NFT Factory
 
 ## TO RUN LOCALLY
 
@@ -32,7 +32,7 @@ maxLimit = 1000;
 
 
 
-**For live deployment**
+## For live deployment only
 
 ## IC
 

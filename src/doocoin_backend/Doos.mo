@@ -18,6 +18,16 @@ module {
                 return elements[0];
             };
             case(false) {
+
+                switch("Need to get completed tasks number sent here from other canister.") {
+                    case("is 0") {
+                        return elements[0];
+                    };
+                    case(_) {
+                        return elements[1];
+                    };
+                };
+
                 return elements[1];
             };
         }
