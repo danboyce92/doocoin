@@ -69,16 +69,16 @@ Alpha Principal - h4gm6-k5f44-42epx-hxmzx-hfc4r-ngo5d-zxkky-7injh-no6t4-7vv3z-ra
 # TO RUN
 
 dfx deploy --argument "(
-  principal\"$(dfx identity get-principal)\", 
-  record {
-    logo = record {
-      logo_type = \"image/png\";
-      data = \"Data here\";
-    };
-    name = \"DooNFTs\";
-    symbol = \"DOO\";
-    maxLimit = 10;
-  }
+principal\"$(dfx identity get-principal)\",
+record {
+logo = record {
+logo_type = \"image/png\";
+data = \"\";
+};
+name = \"Doo Dynamic NFT Factory\";
+symbol = \"DOO\";
+maxLimit = 1000;
+}
 )" doocoin_backend
 
 # IC
@@ -90,9 +90,24 @@ logo = record {
 logo_type = \"image/png\";
 data = \"\";
 };
-name = \"My DIP721\";
-symbol = \"DFXB\";
-maxLimit = 10;
+name = \"Doo Dynamic NFT Factory\";
+symbol = \"DOO\";
+maxLimit = 1000;
+}
+)" doocoin_backend
+
+# Staging
+
+dfx deploy --network staging --argument "(
+principal\"$(dfx identity get-principal)\",
+record {
+logo = record {
+logo_type = \"image/png\";
+data = \"\";
+};
+name = \"Doo Dynamic NFT Factory\";
+symbol = \"DOO\";
+maxLimit = 1000;
 }
 )" doocoin_backend
 
@@ -108,19 +123,19 @@ DATA_BLOB="blob\"$DATA_BASE64\""
 
 dfx canister call doocoin_backend mintDip721 \
 "(
-  principal \"$(dfx identity get-principal)\",
-  vec {
-    record {
-      purpose = variant { Rendered };
-      data = 
-      key_val_data = vec {
-        record { key = \"description\"; val = variant { TextContent = \"The NFT metadata can hold arbitrary metadata\" }; };
-        record { key = \"tag\"; val = variant { TextContent = \"Dynamic kids cute easter egg\" }; };
-        record { key = \"contentType\"; val = variant { TextContent = \"text/plain\" }; };
-        record { key = \"locationType\"; val = variant { Nat8Content = 4:nat8 } };
-      }
-    }
-  }
+principal \"$(dfx identity get-principal)\",
+vec {
+record {
+purpose = variant { Rendered };
+data =
+key_val_data = vec {
+record { key = \"description\"; val = variant { TextContent = \"The NFT metadata can hold arbitrary metadata\" }; };
+record { key = \"tag\"; val = variant { TextContent = \"Dynamic kids cute easter egg\" }; };
+record { key = \"contentType\"; val = variant { TextContent = \"text/plain\" }; };
+record { key = \"locationType\"; val = variant { Nat8Content = 4:nat8 } };
+}
+}
+}
 )"
 
 walletId="lpteq-btov7-wwcmf-3vvt7-c5kkb-bmcah-qruk5-rxp7h-f3jjo-yvck3-5qe"
