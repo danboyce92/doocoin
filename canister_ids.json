@@ -1,8 +1,10 @@
 {
   "doocoin_backend": {
-    "ic": "qivvz-uiaaa-aaaah-qdcxq-cai"
+    "ic": "qivvz-uiaaa-aaaah-qdcxq-cai",
+    "staging": "sjmba-qaaaa-aaaah-qdc2a-cai"
   },
   "doocoin_frontend": {
-    "ic": "svi3r-haaaa-aaaah-qdcya-cai"
+    "ic": "svi3r-haaaa-aaaah-qdcya-cai",
+    "staging": "sonhu-5yaaa-aaaah-qdc2q-cai"
   }
 }
