@@ -49,16 +49,8 @@ shared actor class DoosNFTCanister(custodian : Principal, init : Types.Dip721Non
     return symbol;
   };
 
-  // Define a public function that queries and returns the NFT's total supply value:
-  public query func totalSupplyDip721() : async Nat64 {
-    return Nat64.fromNat(
-      List.size(nfts)
-    );
-  };
-
-
   // Define a public function that queries and returns the NFT's max limit value:
-  public query func getMaxLimitDip721() : async Nat16 {
+  public query func getMaxLimitOfDoos() : async Nat16 {
     return maxLimit;
   };
 
