@@ -1,4 +1,3 @@
-// Import the necessary packages
 import Nat "mo:base/Nat";
 import Nat8 "mo:base/Nat8";
 import Nat16 "mo:base/Nat16";
@@ -16,11 +15,9 @@ import Text "mo:base/Text";
 import Types "./Types";
 import Doos "./Doos";
 
-// Define a shared actor class called 'Dip721NFT' that takes a 'Principal' ID as the custodian value and is initialized with the types for the Dip721NonFungibleToken.
-// This actor class also defines several stable variables.
-shared actor class Dip721NFT(custodian : Principal, init : Types.Dip721NonFungibleToken) = Self {
 
-  let dooBase64 = Doos.elements;
+shared actor class DoosNFTCanister(custodian : Principal, init : Types.Dip721NonFungibleToken) = Self {
+
   stable var transactionId : Types.TransactionId = 0;
   stable var nfts = List.nil<Types.Nft>();
   stable var custodians = List.make<Principal>(custodian);
@@ -31,22 +28,9 @@ shared actor class Dip721NFT(custodian : Principal, init : Types.Dip721NonFungib
 
 
 
-  //START OF ORDINARY NFT FUNCTIONS
 
-  // Define a 'null_address' variable. Check out the forum post for a detailed explanation:
-  // https://forum.dfinity.org/t/is-there-any-address-0-equivalent-at-dfinity-motoko/5445/3
-  let null_address : Principal = Principal.fromText("aaaaa-aa");
 
-  // Define a public function called 'balanceOfDip721' that returns the current balance of NFTs for the current user:
-  public query func balanceOfDip721(user : Principal) : async Nat64 {
-    return Nat64.fromNat(
-      List.size(
-        List.filter(nfts, func(token : Types.Nft) : Bool { token.owner == user })
-      )
-    );
-  };
-
-  // Define a public function called 'ownerOfDip721' that returns the principal that owns an NFT:
+  //Used to verify the easterMint function sends ownership of the egg to the correct principal
   public query func ownerOfDip721(token_id : Types.TokenId) : async Types.OwnerResult {
     let item = List.find(nfts, func(token : Types.Nft) : Bool { token.id == token_id });
     switch (item) {
@@ -56,15 +40,6 @@ shared actor class Dip721NFT(custodian : Principal, init : Types.Dip721NonFungib
       case (?token) {
         return #Ok(token.owner);
       };
-    };
-  };
-
-  // Define a shared function called 'safeTransferFromDip721' that provides functionality for transferring NFTs and checks if the transfer is from the 'null_address', and errors if it is:
-  public shared ({ caller }) func safeTransferFromDip721(from : Principal, to : Principal, token_id : Types.TokenId) : async Types.TxReceipt {
-    if (to == null_address) {
-      return #Err(#ZeroAddress);
-    } else {
-      return transferFrom(from, to, token_id, caller);
     };
   };
 
@@ -110,15 +85,6 @@ shared actor class Dip721NFT(custodian : Principal, init : Types.Dip721NonFungib
     };
   };
 
-  // Define a public function that queries and returns the supported interfaces:
-  public query func supportedInterfacesDip721() : async [Types.InterfaceId] {
-    return [#TransferNotification, #Burn, #Mint];
-  };
-
-  // Define a public function that queries and returns the NFT's logo:
-  public query func logoDip721() : async Types.LogoResult {
-    return logo;
-  };
 
   // Define a public function that queries and returns the NFT's name:
   public query func nameDip721() : async Text {
@@ -137,18 +103,6 @@ shared actor class Dip721NFT(custodian : Principal, init : Types.Dip721NonFungib
     );
   };
 
-  // Define a public function that queries and returns the NFT's metadata:
-  public query func getMetadataDip721(token_id : Types.TokenId) : async Types.MetadataResult {
-    let item = List.find(nfts, func(token : Types.Nft) : Bool { token.id == token_id });
-    switch (item) {
-      case null {
-        return #Err(#InvalidTokenId);
-      };
-      case (?token) {
-        return #Ok(token.metadata);
-      };
-    };
-  };
 
   // Define a public function that queries and returns the NFT's max limit value:
   public query func getMaxLimitDip721() : async Nat16 {
@@ -204,10 +158,13 @@ shared actor class Dip721NFT(custodian : Principal, init : Types.Dip721NonFungib
     });
   };
 
-  public func mint(to: Principal) : async Text {
+  //Mints an nft and gives ownership to the provided principal address
+  public func easterMint(to: Text) : async Text {
+    let principal = Principal.fromText(to);
+
     let newId = Nat64.fromNat(List.size(nfts));
     let nft : Types.Nft = {
-      owner = to;
+      owner = principal;
       id = newId;
       metadata = "HardCoded";
     };
@@ -215,20 +172,12 @@ shared actor class Dip721NFT(custodian : Principal, init : Types.Dip721NonFungib
 
     transactionId += 1;
 
-    return "qivvz-uiaaa-aaaah-qdcxq";
+    return to # " is now the proud owner of a Doo Egg!";
   };
 
-  public func getTime() : async Int {
-    let time = Time.now();
-    return time;
-  };
-
-
+  //Renders the relevant nft image
   public query func http_request(request : Types.HttpRequest) : async Types.HttpResponse {
-    // let width : Text = "500";
-    // let height : Text = "500";
     let ctype = "text/html";
-    // let ctype2 = "text/svg";
     let path = Iter.toArray(Text.tokens(request.url, #text("/")));
 
     return {
@@ -238,6 +187,19 @@ shared actor class Dip721NFT(custodian : Principal, init : Types.Dip721NonFungib
       streaming_strategy = null;
     };
 
-  }
+  };
+
+
+  //Returns tokenId of the doo that needs to evolve.
+  //Not implemented
+  public func evolve(owner: Text) : async Types.TokenId {
+    let principal = Principal.fromText(owner);
+
+    let items = List.filter(nfts, func(token : Types.Nft) : Bool { token.owner == principal });
+    let tokenIds = List.map(items, func(item : Types.Nft) : Types.TokenId { item.id });
+    let array = List.toArray(tokenIds);
+    return array[0];
+
+  };
 
 };

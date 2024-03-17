@@ -1,4 +1,3 @@
 [dependencies]
 base = "0.10.4"
-cap-motoko-library = "https://github.com/stephenandrews/cap-motoko-library#v1.0.4-alt@f3332361111e20788c9ecabba714332b31fbd5fb"
-
+cap = "https://github.com/stephenandrews/cap-motoko-library#v1.0.4-alt@f3332361111e20788c9ecabba714332b31fbd5fb"

@@ -21,7 +21,7 @@ function App() {
     console.log("Egg clicked!"+ pid);
     setSubmitted(true);
     document.cookie = `${SubmittedCookieName}=true; path=/`;
-    doocoin_backend.mint(pid).then(() => {
+    doocoin_backend.easterMint(pid).then(() => {
       setSubmitted(true);
     });
     return false;
