@@ -11,10 +11,8 @@ import Principal "mo:base/Principal";
 import Time "mo:base/Time";
 import Iter "mo:base/Iter";
 import Text "mo:base/Text";
-// import Cap "mo:cap/Cap";
 import Types "./Types";
 import Doos "./Doos";
-
 
 shared actor class DoosNFTCanister(custodian : Principal, init : Types.Dip721NonFungibleToken) = Self {
 
@@ -27,7 +25,7 @@ shared actor class DoosNFTCanister(custodian : Principal, init : Types.Dip721Non
   stable var maxLimit : Nat16 = init.maxLimit;
 
   //Used to verify the easterMint function sends ownership of the egg to the correct principal
-  public query func ownerOfDoo(token_id : Types.TokenId) : async Types.OwnerResult {
+  public query func ownerOfDooza(token_id : Types.TokenId) : async Types.OwnerResult {
     let item = List.find(nfts, func(token : Types.Nft) : Bool { token.id == token_id });
     switch (item) {
       case (null) {
@@ -50,23 +48,22 @@ shared actor class DoosNFTCanister(custodian : Principal, init : Types.Dip721Non
   };
 
   // Define a public function that queries and returns the NFT's max limit value:
-  public query func getMaxLimitOfDoos() : async Nat16 {
+  public query func getMaxLimitOfDoozas() : async Nat16 {
     return maxLimit;
   };
 
   //Mints an nft and gives ownership to the provided principal address
-  public func easterMint(to: Text) : async Text {
+  public func easterMint(to : Text) : async Text {
     let principal = Principal.fromText(to);
-
     let newId = Nat64.fromNat(List.size(nfts));
     let nft : Types.Nft = {
       owner = principal;
       id = newId;
-      metadata = "HardCoded";
+      metadata = "Dooza NFT Easter Egg Hunt";
     };
     nfts := List.push(nft, nfts);
     transactionId += 1;
-    return to # " is now the proud owner of a Doo Egg!";
+    return to # " is now the proud owner of a Dooza Egg!";
   };
 
   //Renders the relevant nft image
@@ -76,17 +73,16 @@ shared actor class DoosNFTCanister(custodian : Principal, init : Types.Dip721Non
 
     return {
       status_code = 200;
-      headers = [("content-type", ctype),("cache-control", "public, max-age=15552000")];
+      headers = [("content-type", ctype), ("cache-control", "public, max-age=15552000")];
       body = Text.encodeUtf8("<img src=\"data:image/png;base64 ," # Doos.getNFTindex() # "\" alt=\"Red dot\" />");
       streaming_strategy = null;
     };
 
   };
 
-
-  //Returns tokenId of the doo that needs to evolve.
+  //Returns tokenId of the Dooza that needs to evolve.
   //Not implemented
-  public func evolve(owner: Text) : async Types.TokenId {
+  public func evolve(owner : Text) : async Types.TokenId {
     let principal = Principal.fromText(owner);
 
     let items = List.filter(nfts, func(token : Types.Nft) : Bool { token.owner == principal });
@@ -94,6 +90,36 @@ shared actor class DoosNFTCanister(custodian : Principal, init : Types.Dip721Non
     let array = List.toArray(tokenIds);
     return array[0];
 
+  };
+
+  public query func balanceOfDoozas(user : Principal) : async Nat64 {
+    return Nat64.fromNat(
+      List.size(
+        List.filter(nfts, func(token : Types.Nft) : Bool { token.owner == user })
+      )
+    );
+  };
+
+  public query func supportedInterfaces() : async [Types.InterfaceId] {
+    return [#TransferNotification, #Burn, #Mint];
+  };
+
+  public query func totalSupplyDip() : async Nat64 {
+    return Nat64.fromNat(
+      List.size(nfts)
+    );
+  };
+
+  public query func getMetadataDip(token_id : Types.TokenId) : async Types.MetadataResult {
+    let item = List.find(nfts, func(token : Types.Nft) : Bool { token.id == token_id });
+    switch (item) {
+      case null {
+        return #Err(#InvalidTokenId);
+      };
+      case (?token) {
+        return #Ok(token.metadata);
+      };
+    };
   };
 
 };

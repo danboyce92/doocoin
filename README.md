@@ -2,7 +2,6 @@
 
 <img src="./src/doocoin_backend/images/nft-logo.png" />
 
-
 ## Welcome to the Dooza NFT Factory
 
 ## TO RUN LOCALLY
@@ -23,13 +22,11 @@ logo = record {
 logo_type = \"image/png\";
 data = \"./src/doocoin_backend/images/nft-logo.png\";
 };
-name = \"Doo Dynamic NFT Factory\";
-symbol = \"DOO\";
-maxLimit = 1000;
+name = \"Dooza Dynamic NFT Egg Hunt\";
+symbol = \"DZA\";
+maxLimit = 10000;
 }
 )" doocoin_backend
-```
-
 
 
 ## For live deployment only
@@ -43,8 +40,8 @@ logo = record {
 logo_type = \"image/png\";
 data = \"./src/doocoin_backend/images/nft-logo.png\";
 };
-name = \"Doo Dynamic NFT Factory\";
-symbol = \"DOO\";
+name = \"Dooza Dynamic NFT Egg Hunt\";
+symbol = \"DZA\";
 maxLimit = 1000;
 }
 )" doocoin_backend
@@ -58,9 +55,12 @@ logo = record {
 logo_type = \"image/png\";
 data = \"\";
 };
-name = \"Doo Dynamic NFT Factory\";
-symbol = \"DOO\";
-maxLimit = 1000;
+name = \"Dooza Dynamic NFT Egg Hunt\";
+symbol = \"DZA\";
+maxLimit = 10000;
 }
 )" doocoin_backend
 
+
+
+```
